@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load cache %}
+
+{% block title %}Последние обновления{% endblock %}
+
+{% block content %}
+    {% include 'menu.html' with index=True %}
+    <h1> Последние обновления на сайте</h1>
+    {% cache 20 index_page page.number %}
+        <!-- Вывод ленты записей -->
+
+        {% for post in page %}
+
+            <!-- Подключаем виджет записей -->
+            {% include "post_item.html" with post=post %}
+
+        {% endfor %}
+        <!-- Вывод паджинатора -->
+        {% if page.has_other_pages %}
+            <ul class="pagination justify-content-center">
+            {% include "paginator.html" with items=page paginator=paginator %}
+            </ul>
+        {% endif %}
+    {% endcache %}
+{% endblock %}

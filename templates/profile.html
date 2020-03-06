@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}Ваш профиль{% endblock %}
+
+{% block content %}
+    <main role="main" class="container">
+        <div class="row">
+
+            <!-- Блок карточки пользователя -->
+
+            {% include 'user_block.html' %}
+
+            <div class="col-md-9">
+
+                <!-- Начало блока с отдельным постом -->
+
+                {% for post in page %}
+                    {% include "post_item.html" with post=post %}
+                {% endfor %}
+
+                <!-- Вывод паджинатора -->
+                {% if page.has_other_pages %}
+                    <ul class="pagination justify-content-center">
+                        {% include "paginator.html" with items=page paginator=paginator %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
