@@ -1,13 +1,11 @@
-import time
-
-from django.core.cache.utils import make_template_fragment_key
-from django.test import TestCase, Client, override_settings
 from django.core import mail
 from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
+from django.test import TestCase, Client, override_settings
 
 from yatube.settings import TEST_CACHE
-from .models import User, Post, Group, Follow
 from .forms import PostForm
+from .models import User, Post, Group, Follow
 
 
 @override_settings(CACHES=TEST_CACHE)
