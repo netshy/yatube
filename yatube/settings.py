@@ -22,26 +22,26 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#2fi74)51=h6v&v-0frm7ea*1wim^+rczo3to8^6mvi@#_2x%='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-#ALLOWED_HOSTS = [
-#    "*",
-#]
+DEBUG = False
 
 ALLOWED_HOSTS = [
-   "85.141.89.67",
-   "localhost",
-   "127.0.0.1",
-   "[::1]",
-   "testserver",
-]
+        "*",
+    ]
 
-INTERNAL_IPS = [
-   "localhost",
-   "127.0.0.1",
-   "[::1]",
-   "testserver",
-]
+#ALLOWED_HOSTS = [
+#    "85.141.89.67",
+#    "localhost",
+#    "127.0.0.1",
+#    "[::1]",
+#    "testserver",
+#]
+
+#INTERNAL_IPS = [
+#    "localhost",
+#    "127.0.0.1",
+#    "[::1]",
+#    "testserver",
+#]
 
 # Application definition
 
@@ -168,9 +168,9 @@ LOGGING = {
 
 # Cache
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    }
+        'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
 }
 
 TEST_CACHE = {

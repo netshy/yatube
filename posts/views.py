@@ -58,9 +58,9 @@ def new_post(request):
         form = PostForm(request.POST, files=request.FILES)
 
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author_id = request.user.id
-            post.save()
+            new_post = form.save(commit=False)
+            new_post.author_id = request.user.id
+            new_post.save()
             return redirect("index")
 
         return render(request, "post_new.html", context={"form": form})
@@ -212,6 +212,7 @@ def profile_follow(request, username):
         Follow.objects.create(user=request.user, author=author)
         return redirect('profile', username)
     return redirect('profile', username)
+
 
 
 @login_required
