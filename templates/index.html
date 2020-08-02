@@ -17,7 +17,7 @@
         <!-- Вывод паджинатора -->
         {% if page.has_other_pages %}
             <ul class="pagination justify-content-center">
-            {% include "paginator.html" with items=page paginator=paginator %}
+                {% include "paginator.html" with items=page paginator=paginator %}
             </ul>
         {% endif %}
     {% endcache %}

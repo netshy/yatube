@@ -22,23 +22,25 @@
                     <!-- Количество записей -->
                     Записей: {{ post_count }}
                 </div>
-        {% if request.user != profile %}
-            <li class="list-group-item">
+                {% if request.user != profile %}
+                    <li class="list-group-item">
                     {% if following %}
 
                         <a class="btn btn-lg btn-light"
-                           href="{% url 'profile_unfollow' profile.username %}" role="button">
+                           href="{% url 'profile_unfollow' profile.username %}"
+                           role="button">
                             Отписаться
                         </a>
                     {% else %}
 
                         <a class="btn btn-lg btn-primary"
-                           href="{% url 'profile_follow' profile.username %}" role="button">
+                           href="{% url 'profile_follow' profile.username %}"
+                           role="button">
                             Подписаться
                         </a>
                     {% endif %}
                 {% endif %}
-            </li>
+                </li>
             </li>
         </ul>
     </div>
