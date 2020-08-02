@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load static %}
 {% block title %}Просмотр записи{% endblock %}
 
 {% block content %}
-
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <main role="main" class="container">
         <div class="row">
 
@@ -24,7 +26,7 @@
                                 <strong class="d-block text-gray-dark">@{{ profile.username }}</strong>
                             </a>
                             <!-- Текст поста -->
-                            {{ post.text }}
+                            {{ post.text | safe}}
                         </p>
                         {% if profile.id == request.user.id %}
                             <div class="d-flex justify-content-between align-items-center">

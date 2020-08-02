@@ -1,13 +1,16 @@
-.git/*
+.git/
 env/
 venv/
 sent_emails/
 media/
 tests/
+*/migrations/
 
 __pycache__/
 *.py[cod]
 
+
+*.env
 .idea
 .DS_Store
 .AppleDouble

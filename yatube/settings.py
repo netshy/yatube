@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +31,10 @@ SECRET_KEY = '#2fi74)51=h6v&v-0frm7ea*1wim^+rczo3to8^6mvi@#_2x%='
 DEBUG = False
 
 ALLOWED_HOSTS = [
-        "*",
+        "130.193.35.74",
+        "localhost",
+        "lundak.tk",
+        "www.lundak.tk"
     ]
 
 #ALLOWED_HOSTS = [
@@ -37,7 +46,7 @@ ALLOWED_HOSTS = [
 #]
 
 #INTERNAL_IPS = [
-#    "localhost",
+#    "37.19.1.202",
 #    "127.0.0.1",
 #    "[::1]",
 #    "testserver",
@@ -57,7 +66,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'sorl.thumbnail',
-    "debug_toolbar",
+    'debug_toolbar',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -97,10 +107,7 @@ WSGI_APPLICATION = 'yatube.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'default': env.db(),
 }
 
 # Password validation
@@ -156,7 +163,7 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 # Идентификатор текущего сайта
-SITE_ID = 2
+SITE_ID = 3
 
 # Logging
 LOGGING = {
@@ -178,3 +185,41 @@ TEST_CACHE = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+# Sentry.io monitoring
+sentry_sdk.init(
+    dsn="https://b7c01989982f4aca9f03e48b656b6c8b@o423841.ingest.sentry.io/5354755",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
+
+# Ckeditor
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Undo', 'Redo', 
+             '-', 'Bold', 'Italic', 'Underline',
+             '-', 'Link', 'Unlink',
+             '-', 'Format',
+             '-', 'Maximize',
+             '-', 'NumberedList', 'BulletedList'
+            ],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
+             '-', 'TextColor',
+             '-', 'Outdent', 'Indent',
+             '-', 'HorizontalRule',
+             '-', 'Blockquote'
+            ]
+        ],
+        'height': 250,
+        'width': '100%',
+        'toolbarCanCollapse': False,
+        'forcePasteAsPlainText': False
+     }
+}
+

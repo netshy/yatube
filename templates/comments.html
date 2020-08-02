@@ -13,7 +13,8 @@
                     <div class="form-group">
                         {{ form.text|addclass:"form-control" }}
                     </div>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button type="submit" class="btn btn-primary">Отправить
+                    </button>
                 </form>
             </div>
         </form>
@@ -22,6 +23,7 @@
 
 <!-- Комментарии -->
 {% for comment in comments %}
+
     <div class="card-body">
         <div class="media mb-4">
             <div class="media-body">
@@ -30,13 +32,16 @@
                         <h6>{{ comment.created }}</h6>
                     </div>
                     <h5 class="mt-0">
-                        <a href="{% url 'profile' comment.author.username %}" name="comment_{{ comment.id }}">
+                        <a href="{% url 'profile' comment.author.username %}"
+                           name="comment_{{ comment.id }}">
                             {{ comment.author.username }}</a></h5>
 
-                    <div class="row mx-md-n5">
-                        <div class="col px-md-5">
-                            <div class="p-3 border bg-light">
-                                {{ comment.text | linebreaks }}
+                    <div class="row">
+                        <div class="col">
+
+                                <div class="p-3 border bg-light">
+                                    {{ comment.text | safe | linebreaks }}
+
                             </div>
                         </div>
                     </div>

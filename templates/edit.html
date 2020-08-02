@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+ 
 {% block title %}Редактировать запись{% endblock %}
 
 {% block content %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
 <div class="row justify-content-center">
     <div class="col-md-8 p-5">
         <div class="card">
@@ -10,11 +16,14 @@
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            {{ form.as_p }}
+                        <div class="form-group row">
+                            {% for field in form %}
+                            <div class="col-md-6"> 
+                                    {{ field.label }} :
+                                    </div>
+                                    <div id="editor"> {{ field }} </div>
+                               {% endfor %}
                         </div>
-                    </div>
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </div>
